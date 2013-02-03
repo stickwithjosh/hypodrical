@@ -1,2 +1,2 @@
-gevent
-psycopg2
+Django==1.4.3
+wsgiref==0.1.2
