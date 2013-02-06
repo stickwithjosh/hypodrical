@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+<channel>
+    <title>Hypothetical Podcast</title>
+    <link>http://www.hypotheticalpodcast.com</link>
+    <description>A church that works</description>
+    <language>en-us</language>
+    <copyright>No Copyright Intended</copyright>
+    <lastBuildDate>{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
+    <category></category>
+    <generator>Django Web Framework</generator>
+    <itunes:author>Hypothetical Podcast</itunes:author>
+    <itunes:owner>
+        <itunes:name>Hypothetical Podcast</itunes:name>
+        <itunes:email>details@engagelakecounty.com</itunes:email>
+    </itunes:owner>
+    <itunes:subtitle>Teaching from Engaging Life - A church that works in Lake County, Florida</itunes:subtitle>
+    <itunes:summary>We're a church that works in Lake County, Florida. These are recording of our weekly Sunday morning teaching.</itunes:summary>
+	<itunes:image href="http://engagelakecounty.com/media/podcast/bits/itunes.png" />
+	<itunes:category text="Religion &amp; Spirituality"/>
+	<itunes:category text="Christianity"/>
+	    
+        
+    {% for object in object_list %}
+    <item>
+        <title>{{ object.title }}</title>
+        <link>http://www.hypotheticalpodcast.com/{{ object.get_absolute_url }}</link>
+        {% load markup %}
+        <description>{{ object.description|markdown }}</description>
+        <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}{{ contributor.name}}{% endfor %}</author>
+        <enclosure url="{{ STATIC_URL }}{{ object.mp3.url }}" type="audio/mpeg" />
+        <guid isPermalink="true">http://www.hypotheticalpodcast.com/{{ object.get_absolute_url }}</guid>
+        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
+        <itunes:author>Hypothetical Podcast</itunes:author>		
+		<itunes:explicit>yes</itunes:explicit>
+    </item>
+
+    {% endfor %}
+
+    
+</channel>
+
+</rss>
