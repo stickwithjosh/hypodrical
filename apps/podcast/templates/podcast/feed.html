@@ -17,7 +17,7 @@
     </itunes:owner>
     <itunes:subtitle>Philosophy, politics, and culture</itunes:subtitle>
     <itunes:summary>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</itunes:summary>
-	<itunes:image href="http://media.hypotheticalpodcast.com.s3.amazonaws.com/i/cover_art_v2.png" />
+	<itunes:image href="{{ STATIC_URL }}img/artwork.png" />
 	<itunes:category text="Religion &amp; Spirituality"/>
 	<itunes:category text="News &amp; Politics"/>
 	    
@@ -29,7 +29,7 @@
         {% load markup %}
         <description>{{ object.description|markdown }}</description>
         <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}{{ contributor.name}}{% endfor %}</author>
-        <enclosure url="{{ STATIC_URL }}{{ object.mp3.url }}" type="audio/mpeg" />
+        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" />
         <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
         <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
         <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
