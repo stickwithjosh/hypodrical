@@ -3,7 +3,7 @@ from sys import path as pythonpath
 
 production = os.environ.get('PRODUCTION', None)
 if production:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG    
