@@ -1,0 +1,10 @@
+{% load gravatar %}
+{% gravatar_img_for_email object.email 100 %}
+<h1>{{ object.name }}</h1>
+{{ object.bio }}
+
+
+<h2>Episodes</h2>
+{% for episode in object.episodes.all %}
+<li><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></li>
+{% endfor %}

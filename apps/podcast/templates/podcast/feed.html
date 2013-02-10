@@ -4,7 +4,7 @@
 <channel>
     <title>Hypothetical Podcast</title>
     <link>http://www.hypotheticalpodcast.com</link>
-    <description>A church that works</description>
+    <description>This is a Hypothetical Podcast. We frequently post recordings of nerdy friends talking about movies, tv shows and other things of interest.</description>
     <language>en-us</language>
     <copyright>No Copyright Intended</copyright>
     <lastBuildDate>{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
@@ -13,19 +13,19 @@
     <itunes:author>Hypothetical Podcast</itunes:author>
     <itunes:owner>
         <itunes:name>Hypothetical Podcast</itunes:name>
-        <itunes:email>details@engagelakecounty.com</itunes:email>
+        <itunes:email>talk@hypotheticalpodcast.com</itunes:email>
     </itunes:owner>
-    <itunes:subtitle>Teaching from Engaging Life - A church that works in Lake County, Florida</itunes:subtitle>
-    <itunes:summary>We're a church that works in Lake County, Florida. These are recording of our weekly Sunday morning teaching.</itunes:summary>
-	<itunes:image href="http://engagelakecounty.com/media/podcast/bits/itunes.png" />
-	<itunes:category text="Religion &amp; Spirituality"/>
-	<itunes:category text="Christianity"/>
+    <itunes:subtitle>Nerds talking with other nerds</itunes:subtitle>
+    <itunes:summary>This is a Hypothetical Podcast. We frequently post recordings of nerdy friends talking about movies, tv shows and other things of interest.</itunes:summary>
+	<itunes:image href="http://media.hypotheticalpodcast.com.s3.amazonaws.com/i/cover_art_v2.png" />
+	<itunes:category text="TV &amp; Film"/>
+	<itunes:category text="Technology"/>
 	    
         
     {% for object in object_list %}
     <item>
         <title>{{ object.title }}</title>
-        <link>http://www.hypotheticalpodcast.com/{{ object.get_absolute_url }}</link>
+        <link>http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}</link>
         {% load markup %}
         <description>{{ object.description|markdown }}</description>
         <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}{{ contributor.name}}{% endfor %}</author>

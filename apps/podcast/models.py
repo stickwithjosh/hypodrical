@@ -2,7 +2,9 @@ from django.db import models
 import tagging
 from durationfield.db.models.fields.duration import DurationField
 from django.views.generic import DetailView
-from django.core.urlresolvers import reverse 
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
+ 
 
 EPISODE_STATUS = (
     ('1', 'Draft'),
@@ -28,6 +30,7 @@ class Podcast(models.Model):
     author_email = models.EmailField(blank=True, )
     copyright = models.CharField(max_length=300)
     categories = models.ManyToManyField(Category)
+    site = models.ForeignKey(Site)
     
     def __unicode__(self):
             return u'%s' % self.name
@@ -35,23 +38,29 @@ class Podcast(models.Model):
     
 class Contributor(models.Model):
     name = models.CharField(max_length=300)
+    slug = models.SlugField(blank=True, )
+    email = models.EmailField()
     twitter = models.CharField(max_length=150)
     home_url = models.URLField()
     bio = models.TextField()
     
     def __unicode__(self):
             return u'%s' % self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ContributorDetail', (), {'slug': str(self.slug)})
     
     
 class Episode(models.Model):
     title = models.CharField(max_length=500,blank=True, )
     slug = models.SlugField(blank=True, )
-    contributors = models.ManyToManyField('Contributor', blank=True, )
+    contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
     pub_date = models.DateTimeField('date published',blank=True, )
     length = DurationField(blank=True, )
     show_notes = models.TextField(blank=True)
-    artwork = models.ImageField(blank=True, upload_to='episodeart/%Y/%m/%d')
-    mp3 = models.FileField(blank=True, upload_to='e/slug')
+    artwork = models.ImageField(blank=True, upload_to='e/art')
+    mp3 = models.FileField(blank=True, upload_to='e')
     status = models.CharField(max_length=1, choices=EPISODE_STATUS)
     
     def __unicode__(self):
@@ -59,10 +68,6 @@ class Episode(models.Model):
             
     @models.permalink
     def get_absolute_url(self):
-        #return "/%i/" % self.id
-        #return reverse('DetailView', (), { 'slug': self.slug })
-        #return ("http://localhost:8000/" + str(self.id))
-        #return ('DetailView.as_view', [], {'slug': self.slug})
         return ('EpisodeDetail', (), {'slug': str(self.slug)})
     
 tagging.register(Episode)

@@ -1,0 +1,9 @@
+<h1>Contributors, what?</h1>
+{% for person in object_list %}
+
+{% load gravatar %}
+<a href="{{ person.get_absolute_url }}">{% gravatar_img_for_email person.email 100 %}</a>
+<br />{{ person.name }}
+<br />
+
+{% endfor %}

@@ -1,12 +1,12 @@
 import os
 from sys import path as pythonpath
 
-
-if os.environ['DEBUG'] == 'False':
+production = os.environ.get('PRODUCTION', None)
+if production:
     DEBUG = False
-    TEMPLATE_DEBUG = DEBUG    
 else:
     DEBUG = True
+    TEMPLATE_DEBUG = DEBUG    
     
     
 
@@ -38,12 +38,14 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-MEDIA_ROOT = ''
-MEDIA_URL = ''
+
+MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
+MEDIA_URL = '/media/'
+
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(APP_DIR, 'static'),
+    os.path.join(APP_DIR, 'hypodrical/static'),
 )
 
 
@@ -70,6 +72,7 @@ ROOT_URLCONF = 'hypodrical.urls'
 WSGI_APPLICATION = 'hypodrical.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(APP_DIR, 'hypodrical/templates'),
 )
 
 INSTALLED_APPS = (
@@ -84,6 +87,48 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'tagging',
     'south',
+    'gravatar',
     'apps.podcast',
 )
+
+
+
+
+
+if production:
+    from memcacheify import memcacheify
+    from postgresify import postgresify
+
+    DATABASES = postgresify()
+    CACHES = memcacheify()
+
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+
+    CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+
+    SITE_ID = 1
+
+    INSTALLED_APPS = list(INSTALLED_APPS) + [
+        'gunicorn',
+    ]
+
+    # Storage backends
+    DEFAULT_FILE_STORAGE = 'storage.MediaS3BotoStorage'
+    STATICFILES_STORAGE = 'storage.StaticS3BotoStorage'
+    COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+    # boto settings
+    AWS_ACCESS_KEY_ID = 'AKIAIJWEP3O4SBAOC7HA'
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'm.animpolitepodcast.com'
+    AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
+
+    # S3 URL settings
+    STATIC_URL = 'https://%s/static/' % AWS_S3_CUSTOM_DOMAIN
+    MEDIA_URL = 'https://%s/media/' % AWS_S3_CUSTOM_DOMAIN
+
+
+
+
+
 

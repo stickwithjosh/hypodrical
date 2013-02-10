@@ -1,4 +1,14 @@
-<h1>Episodes, what?</h1>
+{% extends "base.html" %}
+
+{% block content %}
 {% for object in object_list %}
-<h1><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+<h1><a href="{{ object.get_absolute_url }}">Episode #{{ object.id }} {{ object.title }}</a></h1>
+
+<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>
+
+{% load markup %}
+{{ object.show_notes|markdown }}
+
 {% endfor %}
+
+{% endblock %}
