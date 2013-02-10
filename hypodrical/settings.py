@@ -125,8 +125,8 @@ if production:
     AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
 
     # S3 URL settings
-    STATIC_URL = 'https://%s/static/' % AWS_S3_CUSTOM_DOMAIN
-    MEDIA_URL = 'https://%s/media/' % AWS_S3_CUSTOM_DOMAIN
+    STATIC_URL = 'http://%s/static/' % AWS_S3_CUSTOM_DOMAIN
+    MEDIA_URL = 'http://%s/media/' % AWS_S3_CUSTOM_DOMAIN
 
 
 
