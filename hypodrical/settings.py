@@ -19,12 +19,11 @@ else:
     MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
     STATICFILES_DIRS = (
         os.path.join(APP_DIR, 'hypodrical/static'),
+        os.path.join(APP_DIR, 'static'),
     )
     MEDIA_URL = '/media/'
 
-    STATIC_ROOT = (
-        os.path.join(APP_DIR, 'static'),
-    )
+    STATIC_ROOT = ''
     STATIC_URL = '/static/'
 
 
