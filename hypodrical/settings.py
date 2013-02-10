@@ -119,7 +119,7 @@ if production:
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     # boto settings
-    AWS_ACCESS_KEY_ID = 'AKIAIJWEP3O4SBAOC7HA'
+    AWS_ACCESS_KEY_ID = 'AKIAIT3JEWHLY36RVOUQ'
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = 'm.animpolitepodcast.com'
     AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
