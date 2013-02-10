@@ -8,6 +8,14 @@ else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG    
     DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
+    MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
+    STATICFILES_DIRS = (
+        os.path.join(APP_DIR, 'hypodrical/static'),
+    )
+    MEDIA_URL = '/media/'
+
+    STATIC_ROOT = ''
+    STATIC_URL = '/static/'
 
 # Base application directory
 APP_DIR = os.path.normpath(os.path.join(
@@ -37,14 +45,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
-MEDIA_URL = '/media/'
 
-STATIC_ROOT = ''
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(APP_DIR, 'hypodrical/static'),
-)
+
 
 
 STATICFILES_FINDERS = (
