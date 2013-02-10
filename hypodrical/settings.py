@@ -7,8 +7,7 @@ if production:
 else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG    
-    
-    
+    DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
 
 # Base application directory
 APP_DIR = os.path.normpath(os.path.join(
@@ -30,7 +29,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
