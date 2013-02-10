@@ -74,7 +74,8 @@ ROOT_URLCONF = 'hypodrical.urls'
 WSGI_APPLICATION = 'hypodrical.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(APP_DIR, 'hypodrical/templates'),
+    os.path.join(APP_DIR, 'templates'),
+    APP_DIR,
 )
 
 INSTALLED_APPS = (
