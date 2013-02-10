@@ -1,10 +1,21 @@
-{% load gravatar %}
-{% gravatar_img_for_email object.email 100 %}
+{% extends "base.html" %}
+
+{% block content %}
+{% load gravatar markup %}
+<div class="righty">{% gravatar_img_for_email object.email 100 %}</div>
+
 <h1>{{ object.name }}</h1>
-{{ object.bio }}
+
+{{ object.bio|markdown }}
+<ul>
+    <li><a href="{{ object.home_url }}">{{ object.home_url }}</a></li>
+    <li><a href="https://twitter.com/{{ object.twitter }}">@{{ object.twitter }}</a></li>
+</ul>
+
 
 
 <h2>Episodes</h2>
 {% for episode in object.episodes.all %}
 <li><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></li>
 {% endfor %}
+{% endblock %}

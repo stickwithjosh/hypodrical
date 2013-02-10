@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 
 <channel>
-    <title>Hypothetical Podcast</title>
-    <link>http://www.hypotheticalpodcast.com</link>
-    <description>This is a Hypothetical Podcast. We frequently post recordings of nerdy friends talking about movies, tv shows and other things of interest.</description>
+    <title>An Impolite Podcast</title>
+    <link>http://www.animpolitepodcast.com</link>
+    <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
     <language>en-us</language>
     <copyright>No Copyright Intended</copyright>
     <lastBuildDate>{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
     <category></category>
     <generator>Django Web Framework</generator>
-    <itunes:author>Hypothetical Podcast</itunes:author>
+    <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>
     <itunes:owner>
-        <itunes:name>Hypothetical Podcast</itunes:name>
-        <itunes:email>talk@hypotheticalpodcast.com</itunes:email>
+        <itunes:name>An Impolite Podcast</itunes:name>
+        <itunes:email>info@animpolitepodcast.com</itunes:email>
     </itunes:owner>
-    <itunes:subtitle>Nerds talking with other nerds</itunes:subtitle>
-    <itunes:summary>This is a Hypothetical Podcast. We frequently post recordings of nerdy friends talking about movies, tv shows and other things of interest.</itunes:summary>
+    <itunes:subtitle>Philosophy, politics, and culture</itunes:subtitle>
+    <itunes:summary>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</itunes:summary>
 	<itunes:image href="http://media.hypotheticalpodcast.com.s3.amazonaws.com/i/cover_art_v2.png" />
-	<itunes:category text="TV &amp; Film"/>
-	<itunes:category text="Technology"/>
+	<itunes:category text="Religion &amp; Spirituality"/>
+	<itunes:category text="News &amp; Politics"/>
 	    
         
     {% for object in object_list %}
     <item>
         <title>{{ object.title }}</title>
-        <link>http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}</link>
+        <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
         {% load markup %}
         <description>{{ object.description|markdown }}</description>
         <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}{{ contributor.name}}{% endfor %}</author>
         <enclosure url="{{ STATIC_URL }}{{ object.mp3.url }}" type="audio/mpeg" />
-        <guid isPermalink="true">http://www.hypotheticalpodcast.com/{{ object.get_absolute_url }}</guid>
+        <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
         <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
-        <itunes:author>Hypothetical Podcast</itunes:author>		
+        <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
 		<itunes:explicit>yes</itunes:explicit>
     </item>
 

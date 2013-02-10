@@ -1,6 +1,14 @@
 import os
 from sys import path as pythonpath
 
+# Base application directory
+APP_DIR = os.path.normpath(os.path.join(
+    os.path.dirname(__file__),
+    os.pardir,
+    os.pardir,
+))
+
+
 production = os.environ.get('PRODUCTION', None)
 if production:
     DEBUG = True
@@ -17,12 +25,6 @@ else:
     STATIC_ROOT = ''
     STATIC_URL = '/static/'
 
-# Base application directory
-APP_DIR = os.path.normpath(os.path.join(
-    os.path.dirname(__file__),
-    os.pardir,
-    os.pardir,
-))
 
 # Update $PYTHONPATH to include apps, project, and settings directories
 pythonpath.insert(1, os.path.join(APP_DIR, 'apps'))
