@@ -17,15 +17,14 @@ else:
     TEMPLATE_DEBUG = DEBUG    
     DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
     MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
-    STATICFILES_DIRS = (
-        os.path.join(APP_DIR, 'hypodrical/static'),
-        os.path.join(APP_DIR, 'static'),
-    )
     MEDIA_URL = '/media/'
 
-    STATIC_ROOT = os.path.join(APP_DIR, 'hypodrical/static')
-    STATIC_URL = '/static/'
 
+STATIC_ROOT = ''
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(APP_DIR, 'hypodrical/static'),
+)
 
 # Update $PYTHONPATH to include apps, project, and settings directories
 pythonpath.insert(1, os.path.join(APP_DIR, 'apps'))
