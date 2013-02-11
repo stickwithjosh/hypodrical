@@ -7,7 +7,7 @@
     <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
     <language>en-us</language>
     <copyright>No Copyright Intended</copyright>
-    <lastBuildDate>{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
+    <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
     <category></category>
     <generator>Django Web Framework</generator>
     <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>
@@ -28,7 +28,7 @@
         <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
         {% load markup %}
         <description>{{ object.description|markdown }}</description>
-        <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}{{ contributor.name}}{% endfor %}</author>
+        <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %}</author>
         <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" />
         <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
         <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
