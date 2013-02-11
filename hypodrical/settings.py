@@ -23,7 +23,7 @@ else:
     )
     MEDIA_URL = '/media/'
 
-    STATIC_ROOT = ''
+    STATIC_ROOT = os.path.join(APP_DIR, 'hypodrical/static')
     STATIC_URL = '/static/'
 
 
