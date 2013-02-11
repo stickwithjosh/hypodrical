@@ -18,13 +18,14 @@ else:
     DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
     MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
     MEDIA_URL = '/media/'
+    STATICFILES_DIRS = (
+        os.path.join(APP_DIR, 'hypodrical/static'),
+    )
 
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(APP_DIR, 'hypodrical/static'),
-)
+
 
 # Update $PYTHONPATH to include apps, project, and settings directories
 pythonpath.insert(1, os.path.join(APP_DIR, 'apps'))
@@ -130,6 +131,10 @@ if production:
     # S3 URL settings
     STATIC_URL = 'http://%s/static/' % AWS_S3_CUSTOM_DOMAIN
     MEDIA_URL = 'http://%s/media/' % AWS_S3_CUSTOM_DOMAIN
+    
+    STATICFILES_DIRS = (
+        os.path.join(APP_DIR, 'static'),
+    )
 
 
 
