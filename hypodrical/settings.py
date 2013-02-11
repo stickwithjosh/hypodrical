@@ -133,7 +133,7 @@ if production:
     MEDIA_URL = 'http://%s/media/' % AWS_S3_CUSTOM_DOMAIN
     
     STATICFILES_DIRS = (
-        os.path.join(APP_DIR, 'static'),
+        'static',
     )
 
 
