@@ -135,6 +135,8 @@ if production:
     STATICFILES_DIRS = (
         'static',
     )
+    
+    AWS_S3_SECURE_URLS = False
 
 
 
