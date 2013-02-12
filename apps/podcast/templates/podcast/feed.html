@@ -31,13 +31,13 @@
        <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
        {% load markup %}
        <description>{{ object.description|markdown }}</description>
-       <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %}</author>
+       <author>info@animpolitepodcas.tomc ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
        <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
        <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
 	<itunes:explicit>yes</itunes:explicit>
-    <media:content url="{{ object.mp3.url }}" type="audio/mpeg" />
+
     <itunes:subtitle>Everything you aren't supposed to talk about at dinner.</itunes:subtitle>
     <itunes:summary>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</itunes:summary>
     
@@ -48,7 +48,7 @@
    
  
    
-<media:credit role="author">Aimee Simone &amp; Joshua Blount</media:credit><media:rating>adult</media:rating><media:description type="plain">Everything you aren't supposed to talk about at dinner.</media:description></channel>
+</channel>
  
 </rss>
  
