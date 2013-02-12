@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
-
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  
 <channel>
+    <atom:link href="http://www.animpolitepodcast.com/feed/" rel="self" type="application/rss+xml" />
    <title>An Impolite Podcast</title>
    <link>http://www.animpolitepodcast.com</link>
    <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
@@ -33,7 +34,7 @@
        <description>{{ object.description|markdown }}</description>
        <author>info@animpolitepodcas.tomc ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
-       <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
+       <guid isPermaLink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
        <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
 	<itunes:explicit>yes</itunes:explicit>
