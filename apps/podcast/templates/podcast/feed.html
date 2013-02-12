@@ -29,7 +29,7 @@
        <title>{{ object.title }}</title>
        <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
        {% load markup %}
-       <description>{{ object.description|markdown }}</description>
+       <description>{{ object.show_notes|markdown }}</description>
        <author>info@animpolitepodcast.com ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
        <guid isPermaLink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
