@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
-
+ 
 <channel>
-    <title>An Impolite Podcast</title>
-    <link>http://www.animpolitepodcast.com</link>
-    <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
-    <language>en-us</language>
-    <copyright>No Copyright Intended</copyright>
-    <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
-    <category></category>
-    <generator>Django Web Framework</generator>
-    <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>
-    <itunes:owner>
-        <itunes:name>An Impolite Podcast</itunes:name>
-        <itunes:email>info@animpolitepodcast.com</itunes:email>
-    </itunes:owner>
-    <itunes:subtitle>Philosophy, politics, and culture</itunes:subtitle>
+   <title>An Impolite Podcast</title>
+   <link>http://www.animpolitepodcast.com</link>
+   <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
+   <language>en-us</language>
+   <copyright>No copyright intended</copyright>
+   <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
+   <category />
+   <generator>Django Web Framework</generator>
+   <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>
+   
+   <itunes:subtitle>Everything you aren't supposed to talk about at dinner.</itunes:subtitle>
+   <itunes:summary>Philosophy, politics and spirituality (or lack of) hosted by Aimee Simone &amp; Joshua Blount.</itunes:summary>
+<itunes:image href="http://m.animpolitepodcast.com/static/img/artwork.png" />
+   
+       
+   
+   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://www.animpolitepodcast.com/feed" /><feedburner:info uri="animpolitepodcast" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><media:copyright>No copyright intended</media:copyright><media:thumbnail url="http://m.animpolitepodcast.com/static/img/artwork.png" /><media:category scheme="http://www.itunes.com/dtds/podcast-1.0.dtd">Religion &amp; Spirituality/Spirituality</media:category><media:category scheme="http://www.itunes.com/dtds/podcast-1.0.dtd">Religion &amp; Spirituality/Christianity</media:category><media:category scheme="http://www.itunes.com/dtds/podcast-1.0.dtd">News &amp; Politics</media:category><itunes:owner><itunes:email>info@animpolitepodcast.com</itunes:email><itunes:name>Aimee Simone &amp; Joshua Blount</itunes:name></itunes:owner><itunes:explicit>yes</itunes:explicit><itunes:category text="Religion &amp; Spirituality"><itunes:category text="Spirituality" /></itunes:category><itunes:category text="Religion &amp; Spirituality"><itunes:category text="Christianity" /></itunes:category><itunes:category text="News &amp; Politics" />
+   
+   {% for object in object_list %}
+   <item>
+       <title>{{ object.title }}</title>
+       <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
+       {% load markup %}
+       <description>{{ object.description|markdown }}</description>
+       <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %}</author>
+       <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
+       <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
+       <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
+       <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
+	<itunes:explicit>yes</itunes:explicit>
+    <media:content url="{{ object.mp3.url }}" type="audio/mpeg" />
+    <itunes:subtitle>Everything you aren't supposed to talk about at dinner.</itunes:subtitle>
     <itunes:summary>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</itunes:summary>
-	<itunes:image href="{{ STATIC_URL }}img/artwork.png" />
-	<itunes:category text="Religion &amp; Spirituality"/>
-	<itunes:category text="News &amp; Politics"/>
-	    
-        
-    {% for object in object_list %}
-    <item>
-        <title>{{ object.title }}</title>
-        <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
-        {% load markup %}
-        <description>{{ object.description|markdown }}</description>
-        <author>{% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %}</author>
-        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" />
-        <guid isPermalink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
-        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
-        <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
-		<itunes:explicit>yes</itunes:explicit>
-    </item>
-
-    {% endfor %}
-
     
-</channel>
+   </item>
 
+   {% endfor %}
+ 
+   
+ 
+   
+<media:credit role="author">Aimee Simone &amp; Joshua Blount</media:credit><media:rating>adult</media:rating><media:description type="plain">Everything you aren't supposed to talk about at dinner.</media:description></channel>
+ 
 </rss>
+ 
