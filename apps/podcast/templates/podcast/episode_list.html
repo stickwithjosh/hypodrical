@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for object in object_list %}
+<h2><a href="{{ object.get_absolute_url }}">Episode #{{ object.id }} {{ object.title }}</a></h2>
+
+<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>
+
+{% load markup %}
+{{ object.show_notes|markdown }}
+
+<p class="meta">Published on {{ object.pub_date|date:"l, F jS" }}</p>
+
+{% endfor %}
+
+{% endblock %}
