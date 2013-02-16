@@ -2,8 +2,8 @@
 {% load markup %}
 
 {% block extraheader %}
-    <meta property="og:title" content="An Impolite Podcast {% if object.title %}- {{ object.title }}{% endif %}" />
-    <meta property="og:description" content="{{ object.show_notes|striptags|truncatewords:15 }}" />
+    <meta property="og:title" content="Unreliables {% if object.title %}- {{ object.title }}{% endif %}" />
+    <meta property="og:description" content="{{ object.show_notes|striptags |truncatewords:15 }}" />
     <meta property="og:image" content="{{ STATIC_URL }}img/fb-share.png" />
     <meta property="og:url" content="http://www.theunreliablespodcast.com{{ object.get_absolute_url }}" />
     <meta property="og:type" content="article" />
