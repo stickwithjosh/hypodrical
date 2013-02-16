@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
  
 <channel>
-   <title>An Impolite Podcast</title>
-   <link>http://www.animpolitepodcast.com</link>
-   <description>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</description>
+   <title>Unreliables</title>
+   <link>http://www.theunreliablespodcast.com/</link>
+   <description>Hackers talking about things, almost monthly</description>
    <language>en-us</language>
    <copyright>No copyright intended</copyright>
    <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
@@ -15,30 +15,30 @@
           
           
           
-   <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>
+   <itunes:author>Eric Allam &amp; Joshua Blount</itunes:author>
    
-   <itunes:subtitle>Everything you aren't supposed to talk about at dinner.</itunes:subtitle>
-   <itunes:summary>Philosophy, politics and spirituality (or lack of) hosted by Aimee Simone &amp; Joshua Blount.</itunes:summary>
-<itunes:image href="http://m.animpolitepodcast.com/static/img/artwork.png" />
+   <itunes:subtitle>Hackers talking about things, almost monthly</itunes:subtitle>
+   <itunes:summary>Group discussion on a variety of topics close to the heart of engineers, hackers, makers, etc</itunes:summary>
+<itunes:image href="http://m.theunreliablespodcast.com/static/img/artwork.png" />
    
        
-  <itunes:owner><itunes:email>info@animpolitepodcast.com</itunes:email><itunes:name>Aimee Simone &amp; Joshua Blount</itunes:name></itunes:owner><itunes:explicit>yes</itunes:explicit><itunes:category text="Religion &amp; Spirituality"><itunes:category text="Spirituality" /></itunes:category><itunes:category text="Religion &amp; Spirituality"><itunes:category text="Christianity" /></itunes:category><itunes:category text="News &amp; Politics" />
+  <itunes:owner><itunes:email>info@theunreliablespodcast.com</itunes:email><itunes:name>Eric Allam &amp; Joshua Blount</itunes:name></itunes:owner><itunes:explicit>yes</itunes:explicit><itunes:category text="Technology"><itunes:category text="Society &amp; Culture" />
    
    {% for object in object_list %}
    <item>
        <title>{{ object.title }}</title>
-       <link>http://www.animpolitepodcast.com{{ object.get_absolute_url }}</link>
+       <link>http://www.theunreliablespodcast.com{{ object.get_absolute_url }}</link>
        {% load markup %}
        <description>{{ object.show_notes }}</description>
-       <author>info@animpolitepodcast.com ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
+       <author>info@theunreliablespodcast.com ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
-       <guid isPermaLink="true">http://www.animpolitepodcast.com{{ object.get_absolute_url }}</guid>
+       <guid isPermaLink="true">http://www.info@theunreliablespodcast.com{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
-       <itunes:author>Aimee Simone &amp; Joshua Blount</itunes:author>		
+       <itunes:author>Eric Allam &amp; Joshua Blount</itunes:author>		
 	<itunes:explicit>yes</itunes:explicit>
 
-    <itunes:subtitle>Everything you aren't supposed to talk about at dinner.</itunes:subtitle>
-    <itunes:summary>Everything you aren't supposed to talk about at dinner, hosted by Aimee Simone and Joshua Blount.</itunes:summary>
+    <itunes:subtitle>Hackers talking about things, almost monthly</itunes:subtitle>
+
     
    </item>
 
