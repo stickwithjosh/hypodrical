@@ -13,6 +13,12 @@ This isn't a reusable app because I'm not really sure how much I want to seperat
     ./manage.py runserver
     
 
+That'll get you rocking locally. If you want to push to heroku it should just be a matter of:
+
+1. Setting config variables for SECRET_KEY, AWS_SECRET_KEY and PRODUCTION (set to True).
+2. Update settings.py to use your AWS_ACCESS_KEY_ID, AWS_STORAGE_BUCKET_NAME, and AWS_S3_CUSTOM_DOMAIN to be accurate for your deal.
+3. You'll probably also want to take a pass throgh the templates and lose the site specific language (particuarly in base.html and feeds.html!) At some point I'll try to get the master branch clean enough so you wouldn't have to worry with this or feeding from the DB maybe so that it's a little less finicky.
+
 
 ### Thanks
 
