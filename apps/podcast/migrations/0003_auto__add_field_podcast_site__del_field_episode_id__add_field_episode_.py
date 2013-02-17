@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Podcast.site'
         db.add_column('podcast_podcast', 'site',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default='1', to=orm['sites.Site']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['sites.Site']),
                       keep_default=False)
 
         # Deleting field 'Episode.id'
@@ -18,7 +18,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Episode.episode_number'
         db.add_column('podcast_episode', 'episode_number',
-                      self.gf('django.db.models.fields.AutoField')(default='1', primary_key=True),
+                      self.gf('django.db.models.fields.AutoField')(default=1, primary_key=True),
                       keep_default=False)
 
 
@@ -28,7 +28,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Episode.id'
         db.add_column('podcast_episode', 'id',
-                      self.gf('django.db.models.fields.AutoField')(default='1', primary_key=True),
+                      self.gf('django.db.models.fields.AutoField')(default=1, primary_key=True),
                       keep_default=False)
 
         # Deleting field 'Episode.episode_number'

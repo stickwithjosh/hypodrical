@@ -11,7 +11,7 @@ APP_DIR = os.path.normpath(os.path.join(
 
 production = os.environ.get('PRODUCTION', None)
 if production:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG    
