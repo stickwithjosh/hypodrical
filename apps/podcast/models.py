@@ -53,7 +53,6 @@ class Contributor(models.Model):
     
     
 class Episode(models.Model):
-    # episode_number = models.AutoField()
     title = models.CharField(max_length=500,blank=True, )
     slug = models.SlugField(blank=True, )
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
