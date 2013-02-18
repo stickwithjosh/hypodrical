@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     )),
     url(r'^contributors/(?P<slug>[\w-]+)/*$', DetailView.as_view(model=Contributor), name='ContributorDetail'),
     url(r'feed/$', PodcastFeed,),
-    url(r'^(?P<pk>\w+)/$', CanonicalDetailView.as_view(model=Episode)),
+    url(r'^(?P<episode_number>\w+)/$', CanonicalDetailView.as_view(model=Episode)),
     url(r'^episode/(?P<slug>[\w-]+)/*$', DetailView.as_view(model=Episode), name='EpisodeDetail'),
     #url(r'^episode/(?P<slug>\w+)/$', DetailView.as_view(model=Episode)),
 )

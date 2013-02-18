@@ -55,6 +55,7 @@ class Contributor(models.Model):
 class Episode(models.Model):
     title = models.CharField(max_length=500,blank=True, )
     slug = models.SlugField(blank=True, )
+    episode_number = models.IntegerField(unique=True, )
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
     pub_date = models.DateTimeField('date published',blank=True, )
     length = DurationField(blank=True, )
