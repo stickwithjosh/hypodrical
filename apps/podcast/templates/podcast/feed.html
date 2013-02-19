@@ -1,7 +1,7 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
  
 <channel>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="hub" href="http://tumblr.superfeedr.com/"/>
    <title>Hypothetical - A weekly movie, comic and media review show</title>
    <link>http://www.hypotheticalpodcast.com/</link>
    <description>A weekly movie, comic and media review show</description>
@@ -9,19 +9,37 @@
    <copyright>No copyright intended</copyright>
    <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
    <generator>Django Web Framework</generator>
-  
-  
+   
+   
+ 
+          
+          
+          
+   <itunes:author>Joshua Blount</itunes:author>
+   
+   <itunes:subtitle>A weekly movie, comic and media review show</itunes:subtitle>
+   <itunes:summary>We talk about and review movies, comics and other things of interest.</itunes:summary>
+<itunes:image href="http://m.hypotheticalpodcast.com/static/img/artwork.png" />
+   
+       
+  <itunes:owner><itunes:email>talk@hypotheticalpodcast.com</itunes:email><itunes:name>Joshua Blount</itunes:name></itunes:owner><itunes:explicit>yes</itunes:explicit><itunes:category text="TV &amp; Film" /></itunes:category>  
    
    {% for object in object_list %}
    <item>
        <title>{{ object.title }}</title>
        <link>http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}</link>
        {% load markup %}
-       <description>{{ object.show_notes|markdown }}</description>
+       <description>{{ object.show_notes }}</description>
        <author>talk@hypotheticalpodcast.com ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
        <guid isPermaLink="true">http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
+       <itunes:author>Joshua Blount</itunes:author>		
+	<itunes:explicit>yes</itunes:explicit>
+
+    <itunes:subtitle>A weekly movie, comic and media review show</itunes:subtitle>
+
+    
    </item>
 
    {% endfor %}
