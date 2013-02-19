@@ -6,10 +6,7 @@ from apps.podcast.views import CanonicalDetailView, PodcastFeed
 # Use Django's new date-based generic classes
 
 urlpatterns = patterns('',
-    url(r'^$', ListView.as_view(
-         queryset=Episode.objects.select_related()
-    )), 
-    
+    url(r'^$', ArchiveIndexView.as_view(model=Episode, date_field="pub_date")),
     url(r'^contributors/$', ListView.as_view(
          queryset=Contributor.objects.select_related()
     )),
