@@ -22,12 +22,6 @@
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
        <guid isPermaLink="true">http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
-       <itunes:author>Joshua Blount</itunes:author>		
-	<itunes:explicit>yes</itunes:explicit>
-
-    <itunes:subtitle>A weekly movie, comic and media review show</itunes:subtitle>
-
-    
    </item>
 
    {% endfor %}
