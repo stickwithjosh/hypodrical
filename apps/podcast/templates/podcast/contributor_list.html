@@ -1,4 +1,6 @@
-<h1>Contributors, what?</h1>
+{% extends "base.html" %}
+{% block content %}
+<h2>Contributors</h2>
 {% for person in object_list %}
 
 {% load gravatar %}
@@ -7,3 +9,4 @@
 <br />
 
 {% endfor %}
+{% endblock %}
