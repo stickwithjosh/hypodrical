@@ -39,6 +39,8 @@
 
     <itunes:subtitle>XXX</itunes:subtitle>
 
+    <itunes:duration>{{ object.length }}</itunes:duration>
+    <itunes:summary>{% autoescape on %}{{ object.show_notes|markdown|truncatewords:20|force_escape }}{% endautoescape %}</itunes:summary>
     
    </item>
 

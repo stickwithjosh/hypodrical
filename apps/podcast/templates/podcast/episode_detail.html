@@ -14,11 +14,10 @@
 {% block content %}
 
 <h2>Episode #{{ object.episode_number }} {{ object.title }}</h2>
-
-<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>
-
+{% if object.mp3 %}<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>{% endif %}
+<p>Length: {{ object.length }}</p>
 <p>Contributors: {% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}<a href="{{ contributor.get_absolute_url }}">{{ contributor.name}}</a>{% endfor %}</p>
-<p><a href="{{ object.mp3.url }}">Download this episode</a></p>
+{% if object.mp3 %}<p><a href="{{ object.mp3.url }}">Download this episode</a></p>{% endif %}
 {{ object.show_notes|markdown }}
 
 {% endblock %}
