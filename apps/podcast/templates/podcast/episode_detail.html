@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% block title %}{% if object.title %}{{ object.title }} - {% endif %}{% endblock %}
 {% load markup %}
 
 {% block extraheader %}
