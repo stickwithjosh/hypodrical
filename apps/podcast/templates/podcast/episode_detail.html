@@ -2,10 +2,10 @@
 {% load markup %}
 
 {% block extraheader %}
-    <meta property="og:title" content="Hypothetical {% if object.title %}- {{ object.title }}{% endif %}" />
+    <meta property="og:title" content="XXX {% if object.title %}- {{ object.title }}{% endif %}" />
     <meta property="og:description" content="{{ object.show_notes|striptags|truncatewords:15 }}" />
     <meta property="og:image" content="{{ STATIC_URL }}img/fb-share.png" />
-    <meta property="og:url" content="http://www.hypotheticalpodcast.com{{ object.get_absolute_url }}" />
+    <meta property="og:url" content="XXX{{ object.get_absolute_url }}" />
     <meta property="og:type" content="article" />
     <meta property="fb:admins" content="678090273"/>
 {% endblock %}
