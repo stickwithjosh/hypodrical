@@ -29,7 +29,6 @@ class Podcast(models.Model):
     author = models.CharField(max_length=300)
     author_email = models.EmailField(blank=True, )
     copyright = models.CharField(max_length=300)
-    categories = models.ManyToManyField(Category)
     site = models.ForeignKey(Site)
     
     def __unicode__(self):
@@ -59,6 +58,7 @@ class Episode(models.Model):
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
     pub_date = models.DateTimeField('date published',blank=True, )
     length = DurationField(blank=True, )
+    short_description = models.TextField(blank=True, ),
     show_notes = models.TextField(blank=True)
     artwork = models.ImageField(blank=True, upload_to='e/art')
     mp3 = models.FileField(blank=True, upload_to='e')

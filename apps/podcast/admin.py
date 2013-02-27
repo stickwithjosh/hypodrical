@@ -1,9 +1,11 @@
 from apps.podcast.models import Podcast, Contributor, Episode, Category
 from django.contrib import admin
 
-admin.site.register(Podcast)
 admin.site.register(Contributor)
-admin.site.register(Episode)
+
 class EpisodeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'episode_number', 'pub_date')
     prepopulated_fields = {"slug": ("title",)}
-admin.site.register(Category)
+    date_hierarchy = 'pub_date'
+    
+admin.site.register(Episode, EpisodeAdmin)

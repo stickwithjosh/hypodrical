@@ -99,10 +99,6 @@ INSTALLED_APPS = (
     'apps.podcast',
 )
 
-
-
-
-
 if production:
     from memcacheify import memcacheify
     from postgresify import postgresify
