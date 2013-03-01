@@ -40,7 +40,7 @@
        <guid isPermaLink="true">http://{{ site.domain }}{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
        <itunes:author>{{ podcast.author }}</itunes:author>		
-	<itunes:explicit>{{ podcast.author_email }}</itunes:explicit>
+       <itunes:explicit>{{ podcast.explicit }}</itunes:explicit>
 
     <itunes:subtitle>{% autoescape on %}{{ object.show_notes|markdown|truncatewords:20|force_escape }}{% endautoescape %}</itunes:subtitle>
 
