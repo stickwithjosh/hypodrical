@@ -4,7 +4,7 @@
 {% load markup %}
 
 {% block extraheader %}
-    <meta property="og:title" content="An Impolite Podcast {% if object.title %}- {{ object.title }}{% endif %}" />
+    <meta property="og:title" content="{% for podcast in site.podcasts.all %}{% if forloop.first %}{{ podcast.name }}{% endif %}{% endfor %} {% if object.title %}- {{ object.title }}{% endif %}" />
     <meta property="og:description" content="{{ object.show_notes|striptags|truncatewords:15 }}" />
     <meta property="og:image" content="{{ STATIC_URL }}img/fb-share.png" />
     <meta property="og:url" content="http://{{ site.domain }}{{ object.get_absolute_url }}" />

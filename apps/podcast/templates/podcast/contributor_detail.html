@@ -15,7 +15,9 @@
 
 
 <h2>Episodes</h2>
+<ol>
 {% for episode in object.episodes.all %}
 <li><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></li>
 {% endfor %}
+</ol>
 {% endblock %}
