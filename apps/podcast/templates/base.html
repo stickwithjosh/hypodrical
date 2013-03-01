@@ -37,9 +37,12 @@
     </head>
     <body>
         <div class="wrap">
-            
-            <h1><a href="/">An Impolite Podcast</a></h1>
-           <h3>Everything you aren't supposed to talk about at dinner, hosted by <a href="http://twitter.com/aimee_simone">Aimee Simone</a> and <a href="http://twitter.com/stickwithjosh">Joshua Blount<a/></h3>
+            {% load markup %}
+            {% for podcast in site.podcasts.all %}
+            {% if forloop.first %}
+            {{ podcast.meta|markdown}}
+            {% endif %}
+            {% endfor %}
             
             {% block content %}{% endblock %}
             
@@ -51,7 +54,7 @@
     <script type="text/javascript">
 
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-37789033-2']);
+      _gaq.push(['_setAccount', '{% for podcast in site.podcasts.all %}{% if forloop.first %}{{ podcast.ga_code }}{% endif %}{% endfor %}']);
       _gaq.push(['_trackPageview']);
 
       (function() {

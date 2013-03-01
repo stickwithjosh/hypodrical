@@ -1,6 +1,7 @@
 from apps.podcast.models import Podcast, Contributor, Episode, Category
 from django.contrib import admin
 
+admin.site.register(Podcast)
 admin.site.register(Contributor)
 
 class EpisodeAdmin(admin.ModelAdmin):
