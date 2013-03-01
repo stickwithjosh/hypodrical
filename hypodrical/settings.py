@@ -123,9 +123,9 @@ if production:
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     # boto settings
-    AWS_ACCESS_KEY_ID = 'XXX'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'XXX'
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET')
     AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
 
     # S3 URL settings
