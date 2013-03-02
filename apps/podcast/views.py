@@ -1,20 +1,18 @@
 from django import http
 from django.views import generic
-from django.views.generic import TemplateView
 from django.views.generic.list_detail import object_list
-from django.contrib.syndication.views import Feed
-from models import Episode, Contributor, Podcast
+from models import Episode
 
-# Create your views here.
 
 def PodcastFeed(request):
-    
+
     return object_list(
         request,
         mimetype='application/rss+xml',
         queryset=Episode.objects.order_by('-pub_date')[0:21],
         template_name='podcast/feed.html')
-        
+
+
 class CanonicalDetailView(generic.DetailView):
     """
         A DetailView which redirects to the absolute_url, if necessary.
@@ -31,4 +29,4 @@ class CanonicalDetailView(generic.DetailView):
         obj_url = self.object.get_absolute_url()
         if self.request.path != obj_url:
             return http.HttpResponsePermanentRedirect(obj_url)
-        return super(CanonicalDetailView, self).get(*args, **kwargs);
+        return super(CanonicalDetailView, self).get(*args, **kwargs)
