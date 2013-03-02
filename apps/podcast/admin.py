@@ -3,7 +3,10 @@ from django.contrib import admin
 
 admin.site.register(Podcast)
 admin.site.register(Contributor)
-admin.site.register(Episode)
+admin.site.register(Category)
+
+
 class EpisodeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-admin.site.register(Category)
+
+admin.site.register(Episode, EpisodeAdmin)

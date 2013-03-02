@@ -55,17 +55,17 @@ class Contributor(models.Model):
 class Episode(models.Model):
     title = models.CharField(max_length=500, blank=True)
     slug = models.SlugField(blank=True)
-    episode_number = models.IntegerField(unique=True)
+    episode_number = models.PositiveIntegerField(unique=True)
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
-    pub_date = models.DateTimeField('date published', blank=True)
-    length = DurationField(blank=True)
+    pub_date = models.DateTimeField('date published')
+    length = DurationField(help_text='e.g., 01:00:00')
     show_notes = models.TextField(blank=True)
     artwork = models.ImageField(blank=True, upload_to='e/art')
     mp3 = models.FileField(blank=True, upload_to='e')
     status = models.CharField(max_length=1, choices=EPISODE_STATUS)
 
     def __unicode__(self):
-            return u'%s' % self.title
+            return u'%s %s' % (self.episode_number, self.title)
 
     @models.permalink
     def get_absolute_url(self):
