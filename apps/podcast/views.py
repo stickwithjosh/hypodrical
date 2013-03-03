@@ -1,3 +1,5 @@
+import datetime
+
 from django import http
 from django.views import generic
 from django.views.generic.list_detail import object_list
@@ -5,11 +7,13 @@ from models import Episode
 
 
 def PodcastFeed(request):
+    queryset = Episode.objects.filter(status=2,
+        pub_date__lte=datetime.datetime.now()).order_by('-pub_date')[:21]
 
     return object_list(
         request,
         mimetype='application/rss+xml',
-        queryset=Episode.objects.order_by('-pub_date')[0:21],
+        queryset=queryset,
         template_name='podcast/feed.html')
 
 
