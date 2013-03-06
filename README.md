@@ -11,6 +11,7 @@ This isn't a reusable app because I'm not really sure how much I want to seperat
     pip install -r requirements.txt
     ./manage.py syncdb
     ./manage.py runserver
+    ./manage.py migrate
     
 
 That'll get you rocking locally. If you want to push to heroku it should just be a matter of:
