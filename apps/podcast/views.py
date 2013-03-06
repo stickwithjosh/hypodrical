@@ -7,6 +7,11 @@ from models import Episode
 
 
 def PodcastFeed(request):
+    """ Fetch the most recent 21? episodes
+        showing most recent first and excluding
+        episodes that are set to publish in the future
+
+    """
     queryset = Episode.objects.filter(status=2,
         pub_date__lte=datetime.datetime.now()).order_by('-pub_date')[:21]
 
