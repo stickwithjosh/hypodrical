@@ -1,44 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
+{% for podcast in site.podcasts.all %}{% if forloop.first %}<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
  
 <channel>
-   <title>XXX</title>
-   <link>XXX</link>
-   <description>XXX</description>
+    <title>{{ podcast.name}}</title>
+    <link>http://{{ site.domain }}</link>
+    <description>{{ podcast.subtitle }}</description>
    <language>en-us</language>
    <copyright>No copyright intended</copyright>
    <lastBuildDate>{{ object_list.0.pub_date|date:"r" }}</lastBuildDate>
    <generator>Django Web Framework</generator>
+   <itunes:author>{{ podcast.author }}</itunes:author>
    
-   
- 
-          
-          
-          
-   <itunes:author>XXX</itunes:author>
-   
-   <itunes:subtitle>XXX</itunes:subtitle>
-   <itunes:summary>XXX</itunes:summary>
-<itunes:image href="XXX" />
+   <itunes:subtitle>{{ podcast.subtitle }}</itunes:subtitle>
+   <itunes:summary>{{ podcast.summary }}</itunes:summary>
+<itunes:image href="{{ MEDIA_URL }}{{ podcast.artwork}}" />
    
        
-  <itunes:owner><itunes:email>XXX</itunes:email><itunes:name>XXX</itunes:name></itunes:owner><itunes:explicit>yes</itunes:explicit><itunes:category text="XXX" />
+    <itunes:owner>
+        <itunes:email>{{ podcast.author_email }}</itunes:email>
+        <itunes:name>{{ podcast.author }}</itunes:name>
+    </itunes:owner>
+    
+    <itunes:explicit>{{ podcast.explicit }}</itunes:explicit>
+    
+    
+    {% autoescape off %}
+    {{ podcast.keywords}}
+     
+    {% endautoescape %}
    
    {% for object in object_list %}
    <item>
        <title>{{ object.title }}</title>
-       <link>XXX{{ object.get_absolute_url }}</link>
+       <link>http://{{ site.domain }}{{ object.get_absolute_url }}</link>
        {% load markup %}
        <description>{% autoescape on %}{{ object.show_notes|markdown|force_escape }}{% endautoescape %}</description>
-       <author>XXX ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
+       <author>{{ podcast.author_email }} ({% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}{{ contributor.name}}{% endfor %})</author>
        <enclosure url="{{ object.mp3.url }}" type="audio/mpeg" length="{{ object.mp3.size }}" />
-       <guid isPermaLink="true">XXX{{ object.get_absolute_url }}</guid>
+       <guid isPermaLink="true">http://{{ site.domain }}{{ object.get_absolute_url }}</guid>
        <pubDate>{{ object.pub_date|date:"r" }}</pubDate>
-       <itunes:author>XXX</itunes:author>		
-	<itunes:explicit>yes</itunes:explicit>
+       <itunes:author>{{ podcast.author }}</itunes:author>		
+       <itunes:explicit>{{ podcast.explicit }}</itunes:explicit>
 
-    <itunes:subtitle>XXX</itunes:subtitle>
+    <itunes:subtitle>{% autoescape on %}{{ object.show_notes|markdown|truncatewords:20|force_escape }}{% endautoescape %}</itunes:subtitle>
 
+    <itunes:duration>{{ object.length }}</itunes:duration>
+    <itunes:summary>{% autoescape on %}{{ object.show_notes|markdown|truncatewords:20|force_escape }}{% endautoescape %}</itunes:summary>
     
    </item>
 
@@ -51,3 +58,5 @@
  
 </rss>
  
+{% endif %}
+{% endfor %}

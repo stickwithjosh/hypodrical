@@ -4,7 +4,7 @@
 {% for object in object_list %}
 <h2><a href="{{ object.get_absolute_url }}">Episode #{{ object.episode_number }} {{ object.title }}</a></h2>
 
-<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>
+{% if object.mp3 %}<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>{% endif %}
 
 {% load markup %}
 {{ object.show_notes|markdown }}

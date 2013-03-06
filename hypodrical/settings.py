@@ -11,7 +11,7 @@ APP_DIR = os.path.normpath(os.path.join(
 
 production = os.environ.get('PRODUCTION', None)
 if production:
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG    
@@ -26,13 +26,7 @@ else:
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
-
-# Update $PYTHONPATH to include apps, project, and settings directories
 pythonpath.insert(1, os.path.join(APP_DIR, 'apps'))
-# pythonpath.insert(2, os.path.join(APP_DIR, 'project'))
-# pythonpath.insert(3, os.path.join(APP_DIR, 'project', 'settings'))
-
-
 
 ADMINS = (
     ('Joshua Blount', 'hello@joshuablount.com'),
@@ -47,10 +41,6 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-
-
-
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -99,9 +89,16 @@ INSTALLED_APPS = (
     'apps.podcast',
 )
 
-
-
-
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'hypodrical.context_processors.site_processor',
+)
 
 if production:
     from memcacheify import memcacheify
@@ -126,9 +123,9 @@ if production:
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     # boto settings
-    AWS_ACCESS_KEY_ID = 'XXX'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'XXX'
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET')
     AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
 
     # S3 URL settings
@@ -140,9 +137,3 @@ if production:
     )
     
     AWS_S3_SECURE_URLS = False
-
-
-
-
-
-

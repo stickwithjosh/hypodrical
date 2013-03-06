@@ -12,7 +12,7 @@ def PodcastFeed(request):
     return object_list(
         request,
         mimetype='application/rss+xml',
-        queryset=Episode.objects.order_by('-pub_date')[0:21],
+        queryset=Episode.objects.order_by('-pub_date').filter(status=2)[0:21],
         template_name='podcast/feed.html')
         
 class CanonicalDetailView(generic.DetailView):

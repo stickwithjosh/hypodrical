@@ -9,6 +9,11 @@ EPISODE_STATUS = (
     ('2', 'Public'),
 )
 
+EXPLICITNESS = (
+    ('yes', 'Dirty'),
+    ('no', 'Clean'),
+)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=300)
@@ -21,19 +26,27 @@ class Category(models.Model):
 
 
 class Podcast(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-    subtitle = models.CharField(max_length=300, blank=True)
-    summary = models.TextField(blank=True)
-    keywords = models.TextField(blank=True)
-    artwork = models.ImageField(blank=True, upload_to='podcastart/%Y/%m/%d')
-    author = models.CharField(max_length=300)
-    author_email = models.EmailField(blank=True)
+    name = models.CharField(max_length=300, help_text='The name of the podcast')
+    subtitle = models.CharField(max_length=300, blank=True,
+                                help_text='One line descriptor')
+    summary = models.TextField(blank=True,
+                               help_text='Paragraph or more description')
+    keywords = models.TextField(blank=True, help_text='iTunes Categories')
+    artwork = models.ImageField(blank=True, upload_to='podcastart/%Y/%m/%d',
+                                help_text='Cover art for the podcast, iTunes prefers 1400x1400 because it ends up on TVs and retina screens and whatnot')
+    author = models.CharField(max_length=300, blank=True,
+                              help_text='This shows up underneath the title in iTunes, I like to use the hosts\' names')
+    author_email = models.EmailField(blank=True,
+                                     help_text='Should be a string similar to x@y.coms')
     copyright = models.CharField(max_length=300)
-    categories = models.ManyToManyField(Category)
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, related_name='podcasts')
+    explicit = models.CharField(max_length=3, choices=EXPLICITNESS,
+                                blank=True, default='1', help_text='Is the podcast dirrrty?')
+    meta = models.TextField(help_text="for the base.html file, markdown formatted HTMLz", blank=True)
+    ga_code = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
-            return u'%s' % self.name
+            return u'%s - %s' % (self.episode, self.name)
 
 
 class Contributor(models.Model):
@@ -54,15 +67,19 @@ class Contributor(models.Model):
 
 class Episode(models.Model):
     title = models.CharField(max_length=500, blank=True)
-    slug = models.SlugField(blank=True)
-    episode_number = models.PositiveIntegerField(unique=True)
+    slug = models.SlugField(blank=True, )
+    episode_number = models.IntegerField(unique=True, blank=True)
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
-    pub_date = models.DateTimeField('date published')
-    length = DurationField(help_text='e.g., 01:00:00')
+    pub_date = models.DateTimeField('date published', blank=True)
+    length = DurationField(blank=True, )
+    short_description = models.TextField(blank=True, ),
     show_notes = models.TextField(blank=True)
     artwork = models.ImageField(blank=True, upload_to='e/art')
     mp3 = models.FileField(blank=True, upload_to='e')
-    status = models.CharField(max_length=1, choices=EPISODE_STATUS)
+    status = models.CharField(max_length=1, choices=EPISODE_STATUS, blank=True)
+    explicit = models.CharField(max_length=3, choices=EXPLICITNESS, blank=True,
+                                default='1',
+                                help_text='Dirt McGirt (did you cut the badwords?)')
 
     def __unicode__(self):
             return u'%s %s' % (self.episode_number, self.title)
@@ -70,5 +87,8 @@ class Episode(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('EpisodeDetail', (), {'slug': str(self.slug)})
+
+    class Meta:
+        ordering = ['-pub_date']
 
 tagging.register(Episode)
