@@ -17,3 +17,4 @@ gunicorn==0.17.2
 psycopg2==2.4.6
 pylibmc==1.2.3
 wsgiref==0.1.2
+mutagen==1.21

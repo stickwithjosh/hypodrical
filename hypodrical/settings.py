@@ -8,14 +8,15 @@ APP_DIR = os.path.normpath(os.path.join(
     os.pardir,
 ))
 
+PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(os.path.realpath(__file__))), '..')
 
 production = os.environ.get('PRODUCTION', None)
 if production:
     DEBUG = False
 else:
     DEBUG = True
-    TEMPLATE_DEBUG = DEBUG    
-    DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db',}}
+    TEMPLATE_DEBUG = DEBUG
+    DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db'}}
     MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
     MEDIA_URL = '/media/'
     STATICFILES_DIRS = (
@@ -131,9 +132,9 @@ if production:
     # S3 URL settings
     STATIC_URL = 'http://%s/static/' % AWS_S3_CUSTOM_DOMAIN
     MEDIA_URL = 'http://%s/media/' % AWS_S3_CUSTOM_DOMAIN
-    
+
     STATICFILES_DIRS = (
         'static',
     )
-    
+
     AWS_S3_SECURE_URLS = False
