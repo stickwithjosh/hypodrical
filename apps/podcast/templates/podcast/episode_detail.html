@@ -3,10 +3,14 @@
 {% block title %}{% if object.title %}{{ object.title }} - {% endif %}{% endblock %}
 {% load markup %}
 
-{% block extraheader %}
+{% block opengraph %}
     <meta property="og:title" content="{% for podcast in site.podcasts.all %}{% if forloop.first %}{{ podcast.name }}{% endif %}{% endfor %} {% if object.title %}- {{ object.title }}{% endif %}" />
     <meta property="og:description" content="{{ object.show_notes|striptags|truncatewords:15 }}" />
+    {% if object.artwork %}
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ object.artwork }}" />
+    {% else %}
     <meta property="og:image" content="{{ STATIC_URL }}img/fb-share.png" />
+    {% endif %}
     <meta property="og:url" content="http://{{ site.domain }}{{ object.get_absolute_url }}" />
     <meta property="og:type" content="article" />
     <meta property="fb:admins" content="678090273"/>
@@ -16,7 +20,7 @@
 <h2>Episode #{{ object.episode_number }} {{ object.title }}</h2>
 {% if object.mp3 %}<p><audio src="{{ object.mp3.url }}" preload="none"></audio></p>{% endif %}
 <p>Length: {{ object.length }}</p>
-<p>Contributors: {% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} & {% endif %}<a href="{{ contributor.get_absolute_url }}">{{ contributor.name}}</a>{% endfor %}</p>
+<p>Contributors: {% for contributor in object.contributors.all %}{% if not forloop.first %}{% if not forloop.last %}, {% endif %}{% endif %}{% if forloop.last %} &amp; {% endif %}<a href="{{ contributor.get_absolute_url }}">{{ contributor.name}}</a>{% endfor %}</p>
 {% if object.mp3 %}<p><a href="{{ object.mp3.url }}">Download this episode</a></p>{% endif %}
 {{ object.show_notes|markdown }}
 
