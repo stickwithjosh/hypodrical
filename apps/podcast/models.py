@@ -101,29 +101,30 @@ class Episode(models.Model):
 
         super(Episode, self).save(*args, **kwargs)
 
-        project_path = settings.PROJECT_PATH
-        mp3 = project_path + self.mp3.url
-        artwork = self.artwork.read()
+        if self.artwork:
+            project_path = settings.PROJECT_PATH
+            mp3 = project_path + self.mp3.url
+            artwork = self.artwork.read()
 
-        audio = MP3(mp3, ID3=ID3)
+            audio = MP3(mp3, ID3=ID3)
 
-        # add ID3 tag if it doesn't exist
-        try:
-            audio.add_tags()
-        except error:
-            pass
+            # add ID3 tag if it doesn't exist
+            try:
+                audio.add_tags()
+            except error:
+                pass
 
-        audio.tags.add(
-            APIC(
-                encoding=3,  # 3 is for utf-8
-                mime='image/png',  # image/jpeg or image/png
-                type=3,  # 3 is for the cover image
-                desc=u'Cover',
-                data=artwork
+            audio.tags.add(
+                APIC(
+                    encoding=3,  # 3 is for utf-8
+                    mime='image/png',  # image/jpeg or image/png
+                    type=3,  # 3 is for the cover image
+                    desc=u'Cover',
+                    data=artwork
+                )
             )
-        )
-        audio.save()
+            audio.save()
 
-        super(Episode, self).save(*args, **kwargs)
+            super(Episode, self).save(*args, **kwargs)
 
 tagging.register(Episode)
