@@ -1,7 +1,13 @@
-from django.db import models
 import tagging
-from durationfield.db.models.fields.duration import DurationField
+
+from django.db import models
 from django.contrib.sites.models import Site
+from django.conf import settings
+
+from durationfield.db.models.fields.duration import DurationField
+
+from mutagen.mp3 import MP3
+from mutagen.id3 import ID3, APIC, error
 
 
 EPISODE_STATUS = (
@@ -90,5 +96,34 @@ class Episode(models.Model):
 
     class Meta:
         ordering = ['-pub_date']
+
+    def save(self, *args, **kwargs):
+
+        super(Episode, self).save(*args, **kwargs)
+
+        project_path = settings.PROJECT_PATH
+        mp3 = project_path + self.mp3.url
+        artwork = self.artwork.read()
+
+        audio = MP3(mp3, ID3=ID3)
+
+        # add ID3 tag if it doesn't exist
+        try:
+            audio.add_tags()
+        except error:
+            pass
+
+        audio.tags.add(
+            APIC(
+                encoding=3,  # 3 is for utf-8
+                mime='image/png',  # image/jpeg or image/png
+                type=3,  # 3 is for the cover image
+                desc=u'Cover',
+                data=artwork
+            )
+        )
+        audio.save()
+
+        super(Episode, self).save(*args, **kwargs)
 
 tagging.register(Episode)
