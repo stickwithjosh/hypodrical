@@ -46,7 +46,7 @@ class Podcast(models.Model):
     ga_code = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
-            return u'%s - %s' % (self.episode, self.name)
+            return u'%s' % self.name
 
 
 class Contributor(models.Model):
