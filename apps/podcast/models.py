@@ -1,8 +1,10 @@
+import os
 import tagging
 
 from django.db import models
 from django.contrib.sites.models import Site
 from django.conf import settings
+from django.template.defaultfilters import slugify
 
 from durationfield.db.models.fields.duration import DurationField
 
@@ -71,6 +73,11 @@ class Contributor(models.Model):
         return ('ContributorDetail', (), {'slug': str(self.slug)})
 
 
+def rename_uploaded_file(instance, filename):
+    #TODO: figure out how to get podcast name in there
+    return os.path.join('e', "%s_%s.mp3" % (instance.episode_number, slugify(instance.title)))
+
+
 class Episode(models.Model):
     title = models.CharField(max_length=500, blank=True)
     slug = models.SlugField(blank=True, )
@@ -81,7 +88,7 @@ class Episode(models.Model):
     short_description = models.TextField(blank=True, ),
     show_notes = models.TextField(blank=True)
     artwork = models.ImageField(blank=True, upload_to='e/art')
-    mp3 = models.FileField(blank=True, upload_to='e')
+    mp3 = models.FileField(blank=True, upload_to=rename_uploaded_file)
     status = models.CharField(max_length=1, choices=EPISODE_STATUS, blank=True)
     explicit = models.CharField(max_length=3, choices=EXPLICITNESS, blank=True,
                                 default='1',
