@@ -81,6 +81,7 @@ def rename_uploaded_file(instance, filename):
 class Episode(models.Model):
     title = models.CharField(max_length=500, blank=True)
     slug = models.SlugField(blank=True, )
+    podcast = models.ForeignKey(Podcast)
     episode_number = models.IntegerField(unique=True, blank=True)
     contributors = models.ManyToManyField('Contributor', blank=True, related_name='episodes')
     pub_date = models.DateTimeField('date published', blank=True)
@@ -108,11 +109,15 @@ class Episode(models.Model):
 
         super(Episode, self).save(*args, **kwargs)
 
-        if self.artwork:
-            project_path = settings.PROJECT_PATH
-            mp3 = project_path + self.mp3.url
-            artwork = self.artwork.read()
+        if self.artwork or self.podcast.artwork:
+            # Look for episode artwork first
+            if self.artwork:
+                artwork = self.artwork.read()
+            # if not then use the podcast artwork
+            elif self.podcast.artwork:
+                artwork = self.podcast.artwork.read()
 
+            mp3 = settings.APP_DIR + self.mp3.url
             audio = MP3(mp3, ID3=ID3)
 
             # add ID3 tag if it doesn't exist

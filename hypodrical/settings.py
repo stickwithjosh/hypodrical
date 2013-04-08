@@ -5,10 +5,7 @@ from sys import path as pythonpath
 APP_DIR = os.path.normpath(os.path.join(
     os.path.dirname(__file__),
     os.pardir,
-    os.pardir,
 ))
-
-PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(os.path.realpath(__file__))), '..')
 
 production = os.environ.get('PRODUCTION', None)
 if production:
@@ -17,12 +14,11 @@ else:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'dev.db'}}
-    MEDIA_ROOT = os.path.join(APP_DIR, 'hypodrical/media')
+    MEDIA_ROOT = os.path.join(APP_DIR, 'media')
     MEDIA_URL = '/media/'
     STATICFILES_DIRS = (
-        os.path.join(APP_DIR, 'hypodrical/static'),
+        os.path.join(APP_DIR, 'static'),
     )
-
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
@@ -34,7 +30,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
